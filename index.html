@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPF Expert Bobak – Regeneracja Filtrów DPF/FAP i Katalizatorów SCR</title>
+  <meta name="description" content="Profesjonalna regeneracja filtrów DPF/FAP i katalizatorów SCR. Szybko, skutecznie, w rozsądnej cenie. P.H.U. Bobak-Trans, Bolesław." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #3ec944;
+      --dark-green: #27a82e;
+      --navy: #0d1f3c;
+      --dark: #111827;
+      --mid: #1e293b;
+      --light-bg: #f1f5f9;
+      --white: #ffffff;
+      --gray: #64748b;
+      --cyan: #06b6d4;
+      --transition: .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 70px;
+      background: rgba(13,31,60,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(62,201,68,.15);
+      transition: box-shadow var(--transition);
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.5); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; }
+    .nav-logo span { font-size: 1.25rem; font-weight: 900; color: var(--white); letter-spacing: -.5px; }
+    .nav-logo span em { color: var(--green); font-style: normal; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color var(--transition); position: relative; padding-bottom: 2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--green); transition: width var(--transition); }
+    .nav-links a:hover { color: var(--green); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { background: var(--green); color: var(--dark); padding: .55rem 1.4rem; border-radius: 50px; font-weight: 700; font-size: .9rem; text-decoration: none; transition: background var(--transition), transform var(--transition); }
+    .nav-cta:hover { background: var(--dark-green); color: #fff; transform: scale(1.04); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--navy) 0%, #0a2a1a 60%, #051a0b 100%);
+      position: relative; overflow: hidden; padding-top: 70px;
+    }
+    .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .hero-particles span {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(62,201,68,.25), transparent 70%);
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-particles span:nth-child(1) { width:400px;height:400px;top:-100px;left:-100px;animation-delay:0s; }
+    .hero-particles span:nth-child(2) { width:300px;height:300px;top:40%;right:-80px;animation-delay:-3s; }
+    .hero-particles span:nth-child(3) { width:200px;height:200px;bottom:10%;left:30%;animation-delay:-6s; }
+    @keyframes float { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-30px) scale(1.05)} }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(62,201,68,.12); border: 1px solid rgba(62,201,68,.3); color: var(--green); padding: .4rem 1rem; border-radius: 50px; font-size: .8rem; font-weight: 600; margin-bottom: 1.5rem; }
+    .hero-badge::before { content:''; width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+    .hero-title { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
+    .hero-title .highlight { color: var(--green); display: block; }
+    .hero-title .sub { color: rgba(255,255,255,.7); font-size: .6em; font-weight: 400; display: block; margin-top: .5rem; }
+    .hero-desc { color: rgba(255,255,255,.65); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2.5rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: linear-gradient(135deg, var(--green), var(--dark-green)); color: var(--dark); padding: .85rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: transform var(--transition), box-shadow var(--transition); box-shadow: 0 8px 24px rgba(62,201,68,.35); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(62,201,68,.5); }
+    .btn-secondary { background: transparent; color: #fff; padding: .85rem 2rem; border-radius: 50px; font-weight: 600; font-size: 1rem; text-decoration: none; border: 1.5px solid rgba(255,255,255,.25); transition: border-color var(--transition), background var(--transition); }
+    .btn-secondary:hover { border-color: var(--green); background: rgba(62,201,68,.08); }
+
+    .hero-stats { display: flex; gap: 2rem; margin-top: 3rem; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 900; color: var(--green); }
+    .stat-label { font-size: .75rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .05em; }
+
+    .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+    .machine-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(62,201,68,.15);
+      border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px);
+      animation: levitate 4s ease-in-out infinite;
+    }
+    @keyframes levitate { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .machine-card img { width: 100%; max-width: 340px; border-radius: 12px; display: block; }
+    .machine-label { text-align: center; color: var(--green); font-size: .85rem; font-weight: 600; margin-top: 1rem; }
+
+    /* ─── SERVICES ─── */
+    #services { padding: 7rem 5%; background: var(--light-bg); color: var(--dark); }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-tag { display: inline-block; background: rgba(62,201,68,.12); color: var(--dark-green); font-size: .8rem; font-weight: 700; padding: .35rem .9rem; border-radius: 50px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .08em; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--dark); }
+    .section-sub { color: var(--gray); margin-top: .75rem; font-size: 1.05rem; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+    .service-card {
+      background: var(--white); border-radius: 20px; padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.05);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .service-card::before { content:''; position:absolute; top:0;left:0;right:0;height:4px; background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+    .service-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(62,201,68,.12), rgba(6,182,212,.1)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1.5rem; }
+    .service-title { font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: .75rem; }
+    .service-desc { color: var(--gray); font-size: .9rem; line-height: 1.65; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
+    .service-tag { background: rgba(62,201,68,.08); color: var(--dark-green); font-size: .75rem; font-weight: 600; padding: .25rem .7rem; border-radius: 50px; }
+
+    /* ─── PROCESS ─── */
+    #process { padding: 7rem 5%; background: var(--dark); }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+    .step {
+      text-align: center; padding: 2rem 1.5rem;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 20px; position: relative;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .step:hover { background: rgba(62,201,68,.05); border-color: rgba(62,201,68,.2); }
+    .step-num { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--dark-green)); color: var(--dark); font-size: 1.2rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
+    .step p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+
+    /* ─── WHY US ─── */
+    #why { padding: 7rem 5%; background: linear-gradient(135deg, #0d1f3c 0%, #051a0b 100%); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1200px; margin: 0 auto; align-items: center; }
+    .why-feature { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.5rem; border-radius: 16px; transition: background var(--transition); }
+    .why-feature:hover { background: rgba(62,201,68,.06); }
+    .why-icon { width: 48px; height: 48px; flex-shrink: 0; border-radius: 12px; background: linear-gradient(135deg, rgba(62,201,68,.2), rgba(62,201,68,.05)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    .why-feature h4 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .why-feature p { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+    .why-image-wrap { position: relative; }
+    .why-big-stat { background: rgba(255,255,255,.04); border: 1px solid rgba(62,201,68,.2); border-radius: 24px; padding: 3rem; text-align: center; }
+    .why-big-num { font-size: 5rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .why-big-label { color: rgba(255,255,255,.6); font-size: 1.1rem; margin-top: .5rem; }
+    .why-extra-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .mini-stat { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 1.2rem; text-align: center; }
+    .mini-stat-num { font-size: 1.8rem; font-weight: 900; color: var(--cyan); }
+    .mini-stat-label { font-size: .75rem; color: rgba(255,255,255,.45); margin-top: .25rem; }
+
+    /* ─── REVIEWS ─── */
+    #reviews { padding: 7rem 5%; background: #0b1120; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+    .review-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 20px; padding: 2rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .review-card:hover { border-color: rgba(62,201,68,.25); transform: translateY(-4px); }
+    .stars { display: flex; gap: 4px; margin-bottom: 1rem; }
+    .star { color: #fbbf24; font-size: 1.1rem; }
+    .review-text { color: rgba(255,255,255,.75); font-size: .92rem; line-height: 1.7; font-style: italic; margin-bottom: 1.5rem; }
+    .reviewer { display: flex; align-items: center; gap: .9rem; }
+    .reviewer-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--cyan)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: var(--dark); }
+    .reviewer-name { font-weight: 700; font-size: .9rem; }
+    .reviewer-meta { font-size: .75rem; color: rgba(255,255,255,.4); }
+    .google-badge { display: flex; align-items: center; gap: 6px; margin-top: 1rem; }
+    .google-badge svg { width: 16px; height: 16px; }
+    .google-badge span { font-size: .75rem; color: rgba(255,255,255,.35); }
+    .owner-reply { background: rgba(62,201,68,.05); border-left: 3px solid var(--green); padding: 1rem; border-radius: 0 8px 8px 0; margin-top: 1rem; font-size: .82rem; color: rgba(255,255,255,.55); }
+    .owner-reply strong { color: var(--green); display: block; margin-bottom: .25rem; font-size: .8rem; }
+
+    /* ─── MAP / CONTACT ─── */
+    #contact { padding: 7rem 5%; background: var(--light-bg); color: var(--dark); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: start; }
+    .contact-info h2 { font-size: 2rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark); }
+    .contact-info p { color: var(--gray); margin-bottom: 2rem; line-height: 1.7; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem; background: var(--white); border-radius: 16px; margin-bottom: .75rem; box-shadow: 0 2px 12px rgba(0,0,0,.05); border: 1px solid rgba(0,0,0,.05); transition: border-color var(--transition); }
+    .contact-item:hover { border-color: var(--green); }
+    .contact-item-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, rgba(62,201,68,.15), rgba(62,201,68,.05)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .contact-item-label { font-size: .75rem; color: var(--gray); }
+    .contact-item-value { font-weight: 700; font-size: .95rem; color: var(--dark); text-decoration: none; }
+    .contact-item-value:hover { color: var(--dark-green); }
+    .map-container { border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,.12); height: 440px; border: 1px solid rgba(0,0,0,.07); }
+    .map-container iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--navy); padding: 3rem 5%; border-top: 1px solid rgba(62,201,68,.15); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-size: 1.2rem; font-weight: 900; color: #fff; }
+    .footer-logo em { color: var(--green); font-style: normal; }
+    .footer-copy { color: rgba(255,255,255,.35); font-size: .82rem; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: rgba(255,255,255,.4); text-decoration: none; font-size: .82rem; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--green); }
+
+    /* ─── FLOATING CTA ─── */
+    .float-cta { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; background: var(--green); color: var(--dark); border: none; border-radius: 50px; padding: .85rem 1.5rem; font-weight: 700; font-size: .9rem; cursor: pointer; box-shadow: 0 8px 24px rgba(62,201,68,.4); transition: transform var(--transition), box-shadow var(--transition); display: flex; align-items: center; gap: .5rem; text-decoration: none; }
+    .float-cta:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 12px 32px rgba(62,201,68,.55); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      .hero-inner, .why-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .why-image-wrap { order: -1; }
+      nav .nav-links, nav .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="18" fill="#0d1f3c"/>
+      <path d="M6 22c4-6 14-10 24-4" stroke="#3ec944" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M8 20c3-2 8-3 14-1" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span><em>DPF</em>EXPERT BOBAK</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Usługi</a></li>
+    <li><a href="#process">Jak działamy</a></li>
+    <li><a href="#why">Dlaczego my</a></li>
+    <li><a href="#reviews">Opinie</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <a class="nav-cta" href="tel:+48668829674">📞 Zadzwoń</a>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').style.display='flex'">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-particles">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Profesjonalna regeneracja filtrów</div>
+      <h1 class="hero-title">
+        Skuteczna
+        <span class="highlight">Regeneracja DPF/FAP</span>
+        <span class="sub">i Katalizatorów SCR</span>
+      </h1>
+      <p class="hero-desc">
+        Specjalizujemy się w profesjonalnej regeneracji filtrów cząstek stałych DPF/FAP
+        oraz katalizatorów SCR. Szybka realizacja, gwarantowana jakość, uczciwe ceny.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="tel:+48668829674">📞 668 829 674</a>
+        <a class="btn-secondary" href="#services">Zobacz usługi</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">5★</div><div class="stat-label">Ocena Google</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Skuteczność</div></div>
+        <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Realizacja</div></div>
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Lat doświadczenia</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="machine-card">
+        <img src="https://www.dpfexpertbobak.pl/assets/machine.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Maszyna do regeneracji DPF" />
+        <div style="display:none;width:320px;height:220px;background:linear-gradient(135deg,#1e293b,#0d2818);border-radius:12px;align-items:center;justify-content:center;flex-direction:column;gap:1rem">
+          <div style="font-size:3rem">🔧</div>
+          <div style="color:rgba(255,255,255,.6);font-size:.9rem;text-align:center">Profesjonalna maszyna<br>do regeneracji DPF/FAP</div>
+        </div>
+        <div class="machine-label">🏆 Certyfikowany sprzęt XTON</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <div class="section-tag">Nasze usługi</div>
+    <h2 class="section-title">Kompleksowa obsługa układów oczyszczania spalin</h2>
+    <p class="section-sub">Specjalizujemy się w regeneracji wszystkich typów filtrów i katalizatorów</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔩</div>
+      <h3 class="service-title">Regeneracja filtrów DPF</h3>
+      <p class="service-desc">Profesjonalne czyszczenie i regeneracja filtrów cząstek stałych DPF. Przywracamy pełną sprawność przy użyciu certyfikowanego sprzętu.</p>
+      <div class="service-tags">
+        <span class="service-tag">Diesel</span>
+        <span class="service-tag">Osobowe</span>
+        <span class="service-tag">Dostawcze</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚗</div>
+      <h3 class="service-title">Regeneracja filtrów FAP</h3>
+      <p class="service-desc">Specjalistyczna regeneracja filtrów FAP stosowanych w pojazdach PSA (Peugeot, Citroën). Pełna diagnostyka i czyszczenie.</p>
+      <div class="service-tags">
+        <span class="service-tag">Peugeot</span>
+        <span class="service-tag">Citroën</span>
+        <span class="service-tag">Toyota</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚗️</div>
+      <h3 class="service-title">Regeneracja katalizatorów SCR</h3>
+      <p class="service-desc">Regeneracja selektywnych katalizatorów redukcji SCR. Przywracamy sprawność układu AdBlue i obniżamy emisję tlenków azotu.</p>
+      <div class="service-tags">
+        <span class="service-tag">AdBlue</span>
+        <span class="service-tag">NOx</span>
+        <span class="service-tag">Euro 6</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3 class="service-title">Diagnostyka i doradztwo</h3>
+      <p class="service-desc">Profesjonalna diagnostyka komputerowa układów emisji spalin. Analiza kodów błędów, ocena stanu filtrów i doradztwo techniczne.</p>
+      <div class="service-tags">
+        <span class="service-tag">OBD</span>
+        <span class="service-tag">Diagnostyka</span>
+        <span class="service-tag">Doradztwo</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚛</div>
+      <h3 class="service-title">Pojazdy ciężarowe</h3>
+      <p class="service-desc">Regeneracja filtrów i katalizatorów do pojazdów ciężarowych, autobusów i maszyn roboczych. Obsługujemy wszystkie marki i modele.</p>
+      <div class="service-tags">
+        <span class="service-tag">TIR</span>
+        <span class="service-tag">Busy</span>
+        <span class="service-tag">Maszyny</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✅</div>
+      <h3 class="service-title">Gwarancja czystości</h3>
+      <p class="service-desc">Na każdą wykonaną regenerację udzielamy gwarancji. Po zabiegu filtr jest testowany i certyfikowany. Pełna dokumentacja serwisowa.</p>
+      <div class="service-tags">
+        <span class="service-tag">Gwarancja</span>
+        <span class="service-tag">Test</span>
+        <span class="service-tag">Certyfikat</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-header">
+    <div class="section-tag" style="background:rgba(62,201,68,.1);color:var(--green)">Jak działamy</div>
+    <h2 class="section-title" style="color:#fff">Szybki i przejrzysty proces</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.5)">Cztery proste kroki do sprawnego filtra DPF</p>
+  </div>
+  <div class="process-steps">
+    <div class="step"><div class="step-num">1</div><h3>Kontakt</h3><p>Zadzwoń lub napisz – ustalimy termin i przekażemy wstępną wycenę usługi.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Przyjęcie</h3><p>Dostarczasz filtr lub pojazd. Wykonujemy szczegółową diagnostykę i ocenę stanu.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Regeneracja</h3><p>Czyszczenie certyfikowanym sprzętem XTON. Wieloetapowy proces przywracania sprawności.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>Odbiór</h3><p>Test końcowy, dokumentacja serwisowa i wydanie filtra. Jeździsz jak nowym!</p></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-grid">
+    <div>
+      <div class="section-tag" style="background:rgba(62,201,68,.1);color:var(--green)">Dlaczego my</div>
+      <h2 class="section-title" style="color:#fff;margin-bottom:2.5rem">Zaufanie poparte wynikami</h2>
+      <div class="why-feature">
+        <div class="why-icon">⚡</div>
+        <div><h4>Ekspresowa realizacja</h4><p>Większość zleceń realizujemy w 24 godziny. Twój czas jest dla nas priorytetem.</p></div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">💰</div>
+        <div><h4>Uczciwe ceny</h4><p>Transparentna wycena przed przystąpieniem do pracy. Żadnych ukrytych kosztów.</p></div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">🏆</div>
+        <div><h4>Certyfikowany sprzęt</h4><p>Używamy profesjonalnego sprzętu XTON – lider w regeneracji filtrów DPF.</p></div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">🛡️</div>
+        <div><h4>Gwarancja jakości</h4><p>Na każdą regenerację udzielamy gwarancji. Jeśli nie pomożemy – nie płacisz.</p></div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">📞</div>
+        <div><h4>Profesjonalna obsługa</h4><p>Doradzimy, wytłumaczymy i przeprowadzimy Cię przez cały proces naprawy.</p></div>
+      </div>
+    </div>
+    <div class="why-image-wrap">
+      <div class="why-big-stat">
+        <div class="why-big-num">98%</div>
+        <div class="why-big-label">skutecznych regeneracji</div>
+        <div class="why-extra-stats">
+          <div class="mini-stat"><div class="mini-stat-num">500+</div><div class="mini-stat-label">Filtrów rocznie</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">5★</div><div class="mini-stat-label">Ocena Google</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">10+</div><div class="mini-stat-label">Lat na rynku</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">24h</div><div class="mini-stat-label">Czas realizacji</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-header">
+    <div class="section-tag" style="background:rgba(251,191,36,.1);color:#fbbf24">Opinie klientów</div>
+    <h2 class="section-title" style="color:#fff">Co mówią nasi klienci</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.5)">Prawdziwe opinie z Google Maps</p>
+  </div>
+  <div class="reviews-grid" style="max-width:1200px;margin:0 auto">
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">"Bardzo polecam DPF EXPERT BOBAK! Moje auto miało problemy z filtrem – po regeneracji wszystko wróciło do normy. Obsługa profesjonalna, cena usługi rozsądna, termin realizacji bardzo szybki. Polecam!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">K</div>
+        <div><div class="reviewer-name">KTBW</div><div class="reviewer-meta">2 lata temu · Google</div></div>
+      </div>
+      <div class="google-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span>Google Maps</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">"Warto tu oddać swój filtr DPF. Solidna robota, uczciwe ceny i miła obsługa. Jestem bardzo zadowolony!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">P</div>
+        <div><div class="reviewer-name">Paweł Sulisz</div><div class="reviewer-meta">rok temu · Google</div></div>
+      </div>
+      <div class="google-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span>Google Maps</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">"Szybko, sprawnie, profesjonalnie. Dobry kontakt. Wszystko na najwyższym poziomie. Terminy realizacji mnie zaskoczyły – oczywiście na PLUS. Dlatego jeśli masz problemy z dpf – polecam firmę DPF EXPERT Bobak!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">T</div>
+        <div><div class="reviewer-name">Tomasz Stump</div><div class="reviewer-meta">2 lata temu · Google</div></div>
+      </div>
+      <div class="google-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span>Google Maps</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">"Warto tu oddać swój filtr DPF. Solidna robota, uczciwe ceny i miła obsługa. Jestem bardzo zadowolony!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">T</div>
+        <div><div class="reviewer-name">Tomek Pniak</div><div class="reviewer-meta">2 lata temu · 45 opinii Google</div></div>
+      </div>
+      <div class="google-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span>Google Maps</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">"Robota na medal, cenowo przystępnie. Polecam!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">Ł</div>
+        <div><div class="reviewer-name">Łukasz</div><div class="reviewer-meta">4 lata temu · 9 opinii · 40 zdjęć</div></div>
+      </div>
+      <div class="google-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span>Google Maps</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">Kontakt i lokalizacja</div>
+    <h2 class="section-title">Znajdź nas</h2>
+    <p class="section-sub">Jesteśmy do Twojej dyspozycji – zadzwoń lub odwiedź nas osobiście</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>P.H.U. Bobak-Trans</h2>
+      <p>Profesjonalna regeneracja filtrów DPF/FAP i katalizatorów SCR. Zapraszamy do kontaktu!</p>
+      <a class="contact-item" href="tel:+48668829674">
+        <div class="contact-item-icon">📱</div>
+        <div><div class="contact-item-label">Telefon</div><div class="contact-item-value">+48 668 829 674</div></div>
+      </a>
+      <a class="contact-item" href="mailto:bobak-trans@wp.pl">
+        <div class="contact-item-icon">✉️</div>
+        <div><div class="contact-item-label">E-mail</div><div class="contact-item-value">bobak-trans@wp.pl</div></div>
+      </a>
+      <a class="contact-item" href="https://www.dpfexpertbobak.pl" target="_blank" rel="noopener">
+        <div class="contact-item-icon">🌐</div>
+        <div><div class="contact-item-label">Strona www</div><div class="contact-item-value">www.dpfexpertbobak.pl</div></div>
+      </a>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div><div class="contact-item-label">Adres</div><div class="contact-item-value" style="text-decoration:none">Bolesławska 113, Kolonia<br>32-329 Bolesław</div></div>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.0!2d19.484!3d50.315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDE4JzU0LjAiTiAxOcKwMjknMDIuNCJF!5e0!3m2!1spl!2spl!4v1680000000000!5m2!1spl!2spl&q=Boles%C5%82awska+113,+Kolonia,+32-329+Boles%C5%82aw"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Lokalizacja DPF Expert Bobak">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><em>DPF</em>EXPERT BOBAK</div>
+    <div class="footer-copy">© 2025 P.H.U. Bobak-Trans. Wszelkie prawa zastrzeżone.</div>
+    <div class="footer-links">
+      <a href="#services">Usługi</a>
+      <a href="#contact">Kontakt</a>
+      <a href="mailto:bobak-trans@wp.pl">E-mail</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<a class="float-cta" href="tel:+48668829674">
+  📞 Zadzwoń teraz
+</a>
+
+<script>
+  // Sticky nav shadow
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .step, .why-feature, .review-card, .contact-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
