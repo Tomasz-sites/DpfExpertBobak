@@ -199,7 +199,7 @@
     .footer-links a:hover { color: var(--green); }
 
     /* ─── FLOATING CTA ─── */
-    .float-cta { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; background: var(--green); color: var(--dark); border: none; border-radius: 50px; padding: .85rem 1.5rem; font-weight: 700; font-size: .9rem; cursor: pointer; box-shadow: 0 8px 24px rgba(62,201,68,.4); transition: transform var(--transition), box-shadow var(--transition); display: flex; align-items: center; gap: .5rem; text-decoration: none; }
+    .float-cta { position: fixed; bottom: 1rem; right: 1rem; z-index: 999; background: var(--green); color: var(--dark); border: none; border-radius: 50px; padding: .7rem 1.2rem; font-weight: 700; font-size: .85rem; cursor: pointer; box-shadow: 0 8px 24px rgba(62,201,68,.4); transition: transform var(--transition), box-shadow var(--transition); display: flex; align-items: center; gap: .5rem; text-decoration: none; }
     .float-cta:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 12px 32px rgba(62,201,68,.55); }
 
     /* ─── MOBILE ─── */
@@ -210,11 +210,79 @@
       nav .nav-links, nav .nav-cta { display: none; }
       .hamburger { display: flex; }
       .hero-stats { flex-wrap: wrap; justify-content: center; }
+      #services, #process, #why, #reviews, #contact { padding: 3.5rem 4%; }
+      .section-title { font-size: 1.6rem; }
+      .why-big-num { font-size: 3.5rem; }
     }
     @media (max-width: 600px) {
       .services-grid { grid-template-columns: 1fr; }
       .process-steps { grid-template-columns: 1fr 1fr; }
       .footer-inner { flex-direction: column; text-align: center; }
+      #services, #process, #why, #reviews, #contact { padding: 2.5rem 4%; }
+      .hero-title { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+      .hero-desc { font-size: .95rem; }
+      .hero-stats { gap: 1rem; }
+      .stat-num { font-size: 1.5rem; }
+      .why-feature { padding: 1rem; gap: .9rem; }
+      .why-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+      .review-card { padding: 1.5rem; }
+      .contact-item { padding: 1rem; }
+      .section-header { margin-bottom: 2rem; }
+      .process-steps { gap: 1rem; }
+      .step { padding: 1.5rem 1rem; }
+    }
+
+    #mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1001;
+      background: rgba(10,20,40,.97);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      animation: fadeIn .25s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    #mobile-menu .menu-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: .3rem;
+    }
+    #mobile-menu a {
+      color: rgba(255,255,255,.9);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      transition: color .2s, background .2s;
+    }
+    #mobile-menu a:hover { color: var(--green); background: rgba(62,201,68,.07); }
+    #mobile-menu .menu-cta {
+      margin-top: 1.5rem;
+      background: var(--green);
+      color: var(--dark) !important;
+      font-weight: 700;
+      border-radius: 50px;
+      width: auto !important;
+      padding: 1rem 2.5rem !important;
+      border-bottom: none !important;
+      font-size: 1.1rem !important;
     }
   </style>
 </head>
@@ -238,7 +306,7 @@
     <li><a href="#contact">Kontakt</a></li>
   </ul>
   <a class="nav-cta" href="tel:+48668829674">📞 Zadzwoń</a>
-  <button class="hamburger" onclick="document.querySelector('.nav-links').style.display='flex'">
+  <button class="hamburger" id="hamburger-btn" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -533,15 +601,48 @@
 </a>
 
 <script>
-  // Sticky nav shadow
   const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // Intersection Observer for fade-in
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
+  function toggleMenu() {
+    const existing = document.getElementById('mobile-menu');
+    if (existing) { existing.remove(); return; }
+    const menu = document.createElement('div');
+    menu.id = 'mobile-menu';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'menu-close';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.onclick = function() { menu.remove(); };
+    menu.appendChild(closeBtn);
+
+    const links = [
+      ['#services','Usługi'],
+      ['#process','Jak działamy'],
+      ['#why','Dlaczego my'],
+      ['#reviews','Opinie'],
+      ['#contact','Kontakt'],
+    ];
+    links.forEach(function(l) {
+      const a = document.createElement('a');
+      a.href = l[0];
+      a.textContent = l[1];
+      a.onclick = function() { menu.remove(); };
+      menu.appendChild(a);
+    });
+    const cta = document.createElement('a');
+    cta.href = 'tel:+48668829674';
+    cta.textContent = '📞 Zadzwoń teraz';
+    cta.className = 'menu-cta';
+    cta.onclick = function() { menu.remove(); };
+    menu.appendChild(cta);
+    document.body.appendChild(menu);
+  }
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
       if (e.isIntersecting) {
         e.target.style.opacity = '1';
         e.target.style.transform = 'translateY(0)';
@@ -549,7 +650,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.service-card, .step, .why-feature, .review-card, .contact-item').forEach(el => {
+  document.querySelectorAll('.service-card, .step, .why-feature, .review-card, .contact-item').forEach(function(el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity .6s ease, transform .6s ease';
