@@ -205,7 +205,16 @@
     /* ─── MOBILE ─── */
     @media (max-width: 900px) {
       .hero-inner, .why-grid, .contact-grid { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
+      .hero-visual { display: flex; }
+      .hero-inner { gap: 1.5rem; align-items: flex-start; }
+      .hero-inner > div:first-child { flex: 1; }
+      .hero-visual { flex: 0 0 140px; margin-top: 0; }
+      .machine-card { padding: .8rem; border-radius: 14px; }
+      .machine-card img { max-width: 130px; border-radius: 8px; }
+      .machine-label { font-size: .65rem; margin-top: .5rem; }
+      .hero-badge { font-size: .72rem; padding: .3rem .8rem; }
+      .hero-actions { flex-direction: column; gap: .7rem; }
+      .btn-primary, .btn-secondary { text-align: center; padding: .75rem 1.2rem; font-size: .9rem; }
       .why-image-wrap { order: -1; }
       nav .nav-links, nav .nav-cta { display: none; }
       .hamburger { display: flex; }
